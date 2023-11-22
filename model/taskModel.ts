@@ -9,7 +9,7 @@ interface iTask{
 
 interface iTaskData extends iTask, Document{};
 
-const taskModdel = new Schema(
+const taskModel = new Schema(
     {
        companyName:{
         type: String
@@ -30,4 +30,4 @@ const taskModdel = new Schema(
     {timestamps: true}
 );
 
-export default model<iTaskData>("Tasks", taskModdel);
+export default model<iTaskData>("Tasks", taskModel);
