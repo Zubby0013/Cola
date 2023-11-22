@@ -4,8 +4,11 @@ import taskModel from "../model/taskModel";
 
 export const createUser = async(req: Request, res:Response)=>{
     try {
+        const {companyName, email, password} = req.body
+        const user = await taskModel.create({companyName, email, password})
         return res.status(201).json({
-            message:"success"
+            message:"success",
+            data:user
         })
     } catch (error) {
         return res.status(404).json({
@@ -17,8 +20,11 @@ export const createUser = async(req: Request, res:Response)=>{
 
 export const readUser = async(req: Request, res:Response)=>{
     try {
+
+        const user = await taskModel.find()
         return res.status(201).json({
-            message:"success in getting"
+            message:"success in getting",
+            data:user
         })
     } catch (error) {
         return res.status(404).json({
@@ -52,10 +58,28 @@ export const deleteUser = async(req: Request, res:Response)=>{
         const user = await taskModel.findByIdAndDelete({userID})
 
         return res.status(200).json({
-            message:"success in deleting"
+            message:"success in deleting",
+            data:user
         })
     } catch (error) {
         return res.status(404).json({
             message:"error"
         })
     }};
+
+
+    export const updateUser = async(req: Request, res:Response)=>{
+        try {
+            const {userID} = req.params
+            const user = await taskModel.findByIdAndUpdate({userID})
+    
+            return res.status(200).json({
+                message:"success in updating",
+                data:user
+            })
+        } catch (error) {
+            return res.status(404).json({
+                message:"error"
+            })
+        }};
+    
